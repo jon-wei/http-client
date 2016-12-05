@@ -16,6 +16,7 @@
 
 package com.metamx.http.client;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.joda.time.Duration;
 
 import javax.net.ssl.SSLContext;
@@ -47,6 +48,12 @@ public class HttpClientConfig
         return "deflate";
       }
     };
+
+    @JsonCreator
+    public static CompressionCodec fromString(String name)
+    {
+      return valueOf(name.toUpperCase());
+    }
 
     public abstract String getEncodingString();
   }
